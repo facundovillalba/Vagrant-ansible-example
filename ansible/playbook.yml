@@ -1,0 +1,21 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+  
+   - name: Update and upgrade apt packages
+     become: true
+     apt:
+     upgrade: yes
+     update_cache: yes
+     
+   - name: Install Node
+     shell: |
+       curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+       sudo apt-get install -y nodejs
+       
+   - name: Install python
+     apt: name=python state=installed update_cache=yes
+     
+   - name: Install the MySQL 
+     apt: name=mysql-server state=installed update_cache=yes
